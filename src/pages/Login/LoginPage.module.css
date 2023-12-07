@@ -1,0 +1,26 @@
+
+.boxForm{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    border-bottom: 1px solid black;
+    padding-bottom: 40px
+}
+.inp{
+    width:100%;
+}
+.prg{
+    font-weight: bold;
+    font-size: 18px;
+    padding: 30px 0;
+    text-align: center;
+}
+.title{
+    font-size: 40px;
+    padding: 40px 0;
+    font-weight:  900;
+}
+.btn{
+    width: 500px;
+}

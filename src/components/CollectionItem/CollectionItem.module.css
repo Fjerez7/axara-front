@@ -1,0 +1,13 @@
+.card{
+    border: 1px solid black ;
+    width: 550px;
+}
+.bodyCard{
+    padding-top: 0;
+}
+.titleCard{
+    font-size: 30px;
+}
+.subtitleCard{
+    font-size: 20px;
+}

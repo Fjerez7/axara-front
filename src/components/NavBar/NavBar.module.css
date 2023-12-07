@@ -1,0 +1,25 @@
+.navBar {
+    padding: 0 50px;
+    margin: 0;
+   height: 80px;
+    background-color: #5d4adf;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    width: 100%;
+}
+.logo{
+    width: 200px;
+}
+.btn {
+    color: white;
+}
+.section{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    gap: 20px;
+}

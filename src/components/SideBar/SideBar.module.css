@@ -1,0 +1,23 @@
+.sideBar{
+    width: 500px;
+    background-color: #5d4adf;
+}
+
+.boxOptions{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px;
+    gap: 50px;
+}
+
+.options{
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+    width: 100px;
+}
+
+.options:hover{
+    text-decoration: underline;
+}
