@@ -4,11 +4,20 @@ import {Button} from "primereact/button";
 import styles from './SignupPage.module.css'
 import {useForm} from "react-hook-form";
 import {Link} from "react-router-dom";
+import axios from "axios";
+
 
 const SignupPage  = () => {
-    const {handleSubmit,register} = useForm()
+    const {handleSubmit,register, getValues} = useForm()
 
-    const onSubmit = (data: any) => console.log(data)
+    const createUser = () => {
+        return axios.post('http://localhost:8080/client',getValues())
+    }
+    const onSubmit = (data: any) => {
+        console.log(data)
+        createUser().then(r => console.log('axios',r) )
+    }
+
 
     return(
         <Layout>
