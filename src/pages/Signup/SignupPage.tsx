@@ -31,12 +31,12 @@ const SignupPage  = () => {
                         </span>
 
                         <span className="p-float-label">
-                        <InputText id="firstname" className={styles.inp} {...register('firstname')} />
+                        <InputText id="firstname" className={styles.inp} {...register('firstName')} />
                         <label htmlFor="firstname">First Name</label>
                          </span>
 
                         <span className="p-float-label">
-                        <InputText id="lastname" className={styles.inp} {...register('lastname')} />
+                        <InputText id="lastname" className={styles.inp} {...register('lastName')} />
                         <label htmlFor="lastname">Last Name</label>
                          </span>
 
