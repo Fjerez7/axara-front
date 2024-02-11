@@ -1,0 +1,22 @@
+.box{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.title{
+    padding-top:40px
+}
+.inp{
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid black;
+}
+.formbox{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+.btn{
+    width: 100%;
+}

@@ -2,20 +2,27 @@ import {Layout} from "../../components/Layout/Layout.tsx";
 import {InputText} from "primereact/inputtext";
 import {Button} from "primereact/button";
 import styles from './SignupPage.module.css'
-import {useForm} from "react-hook-form";
+import {Controller, useForm} from "react-hook-form";
 import {Link} from "react-router-dom";
-import axios from "axios";
+import {createUser} from "../../queries/SignupQ.ts";
+import {classNames} from "primereact/utils";
 
 
 const SignupPage  = () => {
-    const {handleSubmit,register, getValues} = useForm()
+    const { handleSubmit,
+            control} = useForm({
+        defaultValues:{
+            email:'',
+            firstName:'',
+            lastName:'',
+            password:''
+        }
+    })
+    const createUserQuery = createUser();
 
-    const createUser = () => {
-        return axios.post('http://localhost:8080/client',getValues())
-    }
     const onSubmit = (data: any) => {
         console.log(data)
-        createUser().then(r => console.log('axios',r) )
+        createUserQuery.mutate(data)
     }
 
 
@@ -25,25 +32,66 @@ const SignupPage  = () => {
                 <h1 className={styles.title}>SIGN UP</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className={styles.boxForm}>
-                       <span className="p-float-label">
-                        <InputText id="email" type={'email'} className={styles.inp} {...register('email')} />
-                        <label htmlFor="email">Email</label>
-                        </span>
-
-                        <span className="p-float-label">
-                        <InputText id="firstname" className={styles.inp} {...register('firstName')} />
-                        <label htmlFor="firstname">First Name</label>
-                         </span>
-
-                        <span className="p-float-label">
-                        <InputText id="lastname" className={styles.inp} {...register('lastName')} />
-                        <label htmlFor="lastname">Last Name</label>
-                         </span>
-
-                        <span className="p-float-label">
-                        <InputText id="password" type={'password'} className={styles.inp} {...register('password')} />
-                        <label htmlFor="password">Password</label>
-                         </span>
+                        <Controller
+                            name="email"
+                            control={control}
+                            rules={{ required: 'Field required' }}
+                            render={({ field, fieldState }) => (
+                                <>
+                                    <span className="p-float-label">
+                                    <InputText id={field.name} type={'email'} value={field.value}
+                                               className={classNames({ 'p-invalid': fieldState.error },styles.inp)}
+                                               onChange={(e) => field.onChange(e.target.value)} />
+                                    <label htmlFor={field.name}>Email</label>
+                                    </span>
+                                </>
+                            )}
+                        />
+                        <Controller
+                            name="firstName"
+                            control={control}
+                            rules={{ required: 'Field required' }}
+                            render={({ field, fieldState }) => (
+                                <>
+                                    <span className="p-float-label">
+                                    <InputText id={field.name} value={field.value}
+                                               className={classNames({ 'p-invalid': fieldState.error },styles.inp)}
+                                               onChange={(e) => field.onChange(e.target.value)} />
+                                    <label htmlFor={field.name}>First Name</label>
+                                    </span>
+                                </>
+                            )}
+                        />
+                        <Controller
+                            name="lastName"
+                            control={control}
+                            rules={{ required: 'Field required' }}
+                            render={({ field, fieldState }) => (
+                                <>
+                                    <span className="p-float-label">
+                                    <InputText id={field.name} value={field.value}
+                                               className={classNames({ 'p-invalid': fieldState.error },styles.inp)}
+                                               onChange={(e) => field.onChange(e.target.value)} />
+                                    <label htmlFor={field.name}>Last Name</label>
+                                    </span>
+                                </>
+                            )}
+                        />
+                        <Controller
+                            name="password"
+                            control={control}
+                            rules={{ required: 'Field required' }}
+                            render={({ field, fieldState }) => (
+                                <>
+                                    <span className="p-float-label">
+                                    <InputText id={field.name} type={'password'} value={field.value}
+                                               className={classNames({ 'p-invalid': fieldState.error },styles.inp)}
+                                               onChange={(e) => field.onChange(e.target.value)} />
+                                    <label htmlFor={field.name}>Password</label>
+                                    </span>
+                                </>
+                            )}
+                        />
                         <Button type={'submit'} label={'SignUp'}/>
                     </div>
                 </form>
