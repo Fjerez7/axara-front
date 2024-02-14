@@ -1,30 +1,71 @@
 import {InputText} from "primereact/inputtext";
-import {useForm} from "react-hook-form";
+import {Controller, useForm} from "react-hook-form";
 import {Button} from "primereact/button";
 import styles from './LoginPage.module.css'
 import {Layout} from "../../components/Layout/Layout.tsx";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {classNames} from "primereact/utils";
+import {loginUser} from "../../queries/LoginQ.ts"
 
 const LoginPage = () => {
 
-    const {register, handleSubmit} = useForm();
+    const { handleSubmit,control} = useForm({
+        defaultValues:{
+            email: "",
+            password:''
+        }
+    })
+    const mutation = loginUser();
+    const navigate = useNavigate()
 
-    const onSubmit = (data:any ) => console.log(data)
+    const onSubmit = async (data:any ) => {
+        try {
+            const response= await mutation.mutateAsync(data)
+            console.log('response',response)
+            document.cookie = `Authorization=${response.data.token}; path=/`
+            navigate("/account")
+        }
+        catch (error){
+            console.error("Error during login:",error)
+        }
+
+    }
     return(
         <Layout>
         <div >
             <h1 className={styles.title}>LOGIN</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className={styles.boxForm}>
-                   <span className="p-float-label">
-                    <InputText id="email" type={'email'} className={styles.inp} {...register('email')} />
-                    <label htmlFor="email">Email</label>
-                    </span>
-
-                    <span className="p-float-label">
-                    <InputText id="password" type={'password'} className={styles.inp} {...register('password')} />
-                    <label htmlFor="password">Password</label>
-                     </span>
+                    <Controller
+                        name="email"
+                        control={control}
+                        rules={{ required: 'Field required' }}
+                        render={({ field, fieldState }) => (
+                            <>
+                                    <span className="p-float-label">
+                                    <InputText id={field.name} type={'email'} value={field.value}
+                                               className={classNames({ 'p-invalid': fieldState.error },styles.inp)}
+                                               onChange={(e) => field.onChange(e.target.value)} />
+                                    <label htmlFor={field.name}>Email</label>
+                                    </span>
+                            </>
+                        )}
+                    />
+                    <Controller
+                        name="password"
+                        control={control}
+                        rules={{ required: 'Field required' }}
+                        render={({ field, fieldState }) => (
+                            <>
+                                    <span className="p-float-label">
+                                    <InputText id={field.name} type={'password'} value={field.value}
+                                               className={classNames({ 'p-invalid': fieldState.error },styles.inp)}
+                                               onChange={(e) => field.onChange(e.target.value)} />
+                                    <label htmlFor={field.name}>Password</label>
+                                    </span>
+                            </>
+                        )}
+                    />
                     <Button type={'submit'} label={'Login'}/>
                 </div>
             </form>

@@ -8,6 +8,7 @@ import SignupPage from "../pages/Signup/SignupPage.tsx";
 import AccountPage from "../pages/Account/AccountPage.tsx";
 import AccountDetailsPage from "../pages/AccountDetails/AccountDetailsPage.tsx";
 import AccountChangePasswordPage from "../pages/AccountChangePassword/AccountChangePasswordPage.tsx";
+import {ProtectedRoute} from "./ProtectedRoute.tsx";
 
 export default function Root() {
     const routes = useRoutes([
@@ -33,7 +34,7 @@ export default function Root() {
         },
         {
             path:'/account',
-            element: <AccountPage userName={'Fabian'}/>,
+            element: <ProtectedRoute><AccountPage/></ProtectedRoute>,
         },
         {
             path: '/account/details',

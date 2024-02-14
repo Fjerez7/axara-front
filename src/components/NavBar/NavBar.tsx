@@ -4,11 +4,16 @@ import logo from '../../assets/logo.png'
 import {Button} from "primereact/button";
 import {FC} from "react";
 import {Link} from "react-router-dom";
+import {checkAuthentication} from "../../routes/ProtectedRoute.tsx";
+import {useAuth} from "../../context/AuthProvider.tsx";
 
 interface NavBarProps {
     onToggleSideBar: () => void
 }
 export const NavBar:FC<NavBarProps> = ({onToggleSideBar}) => {
+    const isAuthenticated = checkAuthentication()
+    const {user} = useAuth()
+
 
     return (
         <nav className={styles.navBar}>
@@ -19,9 +24,18 @@ export const NavBar:FC<NavBarProps> = ({onToggleSideBar}) => {
                 </Link>
             </div>
             <div className={styles.section}>
-                <Link to={'/login'}>
-                <Button icon='pi pi-user' label={'Account'} text className={styles.btn}/>
-                </Link>
+                {!isAuthenticated ?
+                    <>
+                        <Link to={'/login'}>
+                        <Button icon='pi pi-user' label={'Account'} text className={styles.btn}/>
+                        </Link>
+                    </> :
+                        <>
+                             <Link to={'/account'}>
+                            <Button icon='pi pi-user' label={user?.firstName} text className={styles.btn}/>
+                             </Link>
+                        </>
+                }
                 <Link to={'/cart'}>
                 <Button icon='pi pi-shopping-cart' label={'Cart'} text className={styles.btn}/>
                 </Link>

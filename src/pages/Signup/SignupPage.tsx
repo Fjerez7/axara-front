@@ -3,7 +3,7 @@ import {InputText} from "primereact/inputtext";
 import {Button} from "primereact/button";
 import styles from './SignupPage.module.css'
 import {Controller, useForm} from "react-hook-form";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {createUser} from "../../queries/SignupQ.ts";
 import {classNames} from "primereact/utils";
 
@@ -19,10 +19,16 @@ const SignupPage  = () => {
         }
     })
     const createUserQuery = createUser();
-
-    const onSubmit = (data: any) => {
-        console.log(data)
-        createUserQuery.mutate(data)
+    const navigate = useNavigate();
+    
+    const onSubmit = async (data: any) => {
+        try {
+            await createUserQuery.mutateAsync(data)
+            navigate('/login')
+        }
+        catch (error) {
+            console.error('Error during resgistration:',error)
+        }
     }
 
 
