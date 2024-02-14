@@ -10,6 +10,7 @@ import AccountDetailsPage from "../pages/AccountDetails/AccountDetailsPage.tsx";
 import AccountChangePasswordPage from "../pages/AccountChangePassword/AccountChangePasswordPage.tsx";
 import {ProtectedRoute} from "./ProtectedRoute.tsx";
 
+// Manage all routes
 export default function Root() {
     const routes = useRoutes([
         {

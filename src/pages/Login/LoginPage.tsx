@@ -8,20 +8,23 @@ import {classNames} from "primereact/utils";
 import {loginUser} from "../../queries/LoginQ.ts"
 
 const LoginPage = () => {
-
+    // hooks of ReactForm library
     const { handleSubmit,control} = useForm({
         defaultValues:{
             email: "",
             password:''
         }
     })
+    // Var calling Query for login
     const mutation = loginUser();
+    // hook to configure routes
     const navigate = useNavigate()
 
     const onSubmit = async (data:any ) => {
         try {
+            //Brings data from Query
             const response= await mutation.mutateAsync(data)
-            console.log('response',response)
+            // Store token in the cookie
             document.cookie = `Authorization=${response.data.token}; path=/`
             navigate("/account")
         }

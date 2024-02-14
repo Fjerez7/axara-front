@@ -13,7 +13,9 @@ interface SideBarProps {
 
 
 export const SideBar:FC<SideBarProps> = ({showState = false,setShowState}) => {
+    // Check if user is Auth
     const isAuthenticated = checkAuthentication();
+    // Brings updateUser for update the global Context
     const {updateUser} = useAuth()
 
     return(
@@ -35,6 +37,7 @@ export const SideBar:FC<SideBarProps> = ({showState = false,setShowState}) => {
                         <Link to={'/collections'} className={styles.options}>Collection</Link>
                         <Link to={'/cart'} className={styles.options}>Cart</Link>
                         <Link to={'/'} className={styles.options} onClick={() => {
+                            //Delete token stored in the cookies
                             document.cookie = 'Authorization=; expires=Thu,   01 Jan   1970   00:00:00 UTC; path=/;'
                             updateUser(null)
                         }}>Logout</Link>

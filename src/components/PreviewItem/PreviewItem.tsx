@@ -8,7 +8,6 @@ interface PreviewItemProps {
     size: 'sm' | 'lg'
 }
 
-
 export const PreviewItem:FC<PreviewItemProps> = ({image,name,size}) => {
     return(
         <>

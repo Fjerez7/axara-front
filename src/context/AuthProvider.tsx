@@ -12,6 +12,7 @@ interface AuthContextType {
     updateUser: (user: User | null) => void;
 }
 
+//Create context for the global Context
 const AuthContext = createContext<AuthContextType>({
     user: null,
     updateUser: () => {},

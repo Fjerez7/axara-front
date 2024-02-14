@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// Get value Cookie
 export function getCookieValue(cookieName:string) {
     const name = cookieName + "="
     const decodedCookie = decodeURIComponent(document.cookie);

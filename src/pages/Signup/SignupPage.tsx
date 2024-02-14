@@ -27,7 +27,7 @@ const SignupPage  = () => {
             navigate('/login')
         }
         catch (error) {
-            console.error('Error during resgistration:',error)
+            console.error('Error during registration:',error)
         }
     }
 

@@ -12,16 +12,19 @@ const AccountPage = () => {
     const navigate = useNavigate()
     const {updateUser} = useAuth()
 
+    // Bring data from method GET in backend
    const {data} = useQuery({
        queryKey:['user'],
        queryFn: fetchUserData
    })
+
     useEffect(() => {
         if (data) {
             updateUser(data);
         }
     }, [data, updateUser]);
 
+    //Function for logout
     const logout = () => {
        document.cookie = 'Authorization=; expires=Thu,   01 Jan   1970   00:00:00 UTC; path=/;'
         updateUser(null)

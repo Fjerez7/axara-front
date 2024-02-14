@@ -11,9 +11,10 @@ interface NavBarProps {
     onToggleSideBar: () => void
 }
 export const NavBar:FC<NavBarProps> = ({onToggleSideBar}) => {
+    // Var for know if user is auth
     const isAuthenticated = checkAuthentication()
+    // Brings user data stored in global context
     const {user} = useAuth()
-
 
     return (
         <nav className={styles.navBar}>
