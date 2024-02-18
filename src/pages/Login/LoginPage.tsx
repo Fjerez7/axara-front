@@ -6,10 +6,13 @@ import {Layout} from "../../components/Layout/Layout.tsx";
 import {Link, useNavigate} from "react-router-dom";
 import {classNames} from "primereact/utils";
 import {loginUser} from "../../queries/LoginQ.ts"
+import {useRef} from "react";
+import {Toast} from "primereact/toast";
+import {generateToast} from "../../utils/generateToast.ts";
 
 const LoginPage = () => {
     // hooks of ReactForm library
-    const { handleSubmit,control} = useForm({
+    const { handleSubmit,control, formState: {errors = {}}, resetField} = useForm({
         defaultValues:{
             email: "",
             password:''
@@ -19,6 +22,7 @@ const LoginPage = () => {
     const mutation = loginUser();
     // hook to configure routes
     const navigate = useNavigate()
+    const toast = useRef<Toast>(null);
 
     const onSubmit = async (data:any ) => {
         try {
@@ -26,18 +30,28 @@ const LoginPage = () => {
             const response= await mutation.mutateAsync(data)
             // Store token in the cookie
             document.cookie = `Authorization=${response.data.token}; path=/`
-            navigate("/account")
+            generateToast(toast,'success', 'Successful login')
+            setTimeout(() => {
+                navigate("/account")
+            },1000)
         }
         catch (error){
-            console.error("Error during login:",error)
+            generateToast(toast,'error',"Invalid login credentials provided")
+            resetField('password')
         }
 
     }
+
+    const validationFields =  () => {
+        errors && generateToast(toast,'error', 'Complete the required fields')
+    }
+
     return(
         <Layout>
         <div >
             <h1 className={styles.title}>LOGIN</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit, validationFields)}>
+                <Toast ref={toast} position={"top-center"}/>
                 <div className={styles.boxForm}>
                     <Controller
                         name="email"

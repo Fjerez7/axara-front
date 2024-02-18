@@ -6,11 +6,15 @@ import {Controller, useForm} from "react-hook-form";
 import {Link, useNavigate} from "react-router-dom";
 import {createUser} from "../../queries/SignupQ.ts";
 import {classNames} from "primereact/utils";
+import {generateToast} from "../../utils/generateToast.ts";
+import {useRef} from "react";
+import {Toast} from "primereact/toast";
 
 
 const SignupPage  = () => {
     const { handleSubmit,
-            control} = useForm({
+            control,
+            formState:{errors = {}}} = useForm({
         defaultValues:{
             email:'',
             firstName:'',
@@ -20,23 +24,33 @@ const SignupPage  = () => {
     })
     const createUserQuery = createUser();
     const navigate = useNavigate();
+    const toast = useRef<Toast>(null)
     
     const onSubmit = async (data: any) => {
         try {
             await createUserQuery.mutateAsync(data)
-            navigate('/login')
+            generateToast(toast,'success','Successful registration, user created')
+            setTimeout(() => {
+                navigate('/login')
+            },1000)
         }
         catch (error) {
             console.error('Error during registration:',error)
         }
     }
 
+    const validationFields = () => {
+        if (errors){
+            generateToast(toast,'error','Complete the required fields')
+        }
+    }
 
     return(
         <Layout>
             <div >
                 <h1 className={styles.title}>SIGN UP</h1>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(onSubmit,validationFields)}>
+                    <Toast ref={toast} position={"top-center"}/>
                     <div className={styles.boxForm}>
                         <Controller
                             name="email"
