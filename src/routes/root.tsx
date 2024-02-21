@@ -36,7 +36,11 @@ export default function Root() {
         },
         {
             path:'/account',
-            element: <ProtectedRoute role={'CLIENT'}><AccountPage/></ProtectedRoute>,
+            element: <ProtectedRoute role='CLIENT'><AccountPage/></ProtectedRoute>,
+        },
+        {
+            path: '/admin/dashboard',
+            element: <ProtectedRoute role='ADMIN'><Dashboard/></ProtectedRoute>
         },
         {
             path: '/account/details',
@@ -45,10 +49,6 @@ export default function Root() {
         {
             path: '/account/change-password',
             element: <AccountChangePasswordPage/>
-        },
-        {
-          path: '/admin/dashboard',
-          element: <ProtectedRoute role={'ADMIN'}><Dashboard/></ProtectedRoute>
         },
         {
             path:'*',

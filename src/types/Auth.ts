@@ -1,7 +1,7 @@
 import {User} from "./User.ts";
 
 export interface AuthResponse {
-    token: string;
+    token?: string;
     role: string
 }
 

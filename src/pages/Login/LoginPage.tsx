@@ -33,6 +33,7 @@ const LoginPage = () => {
             updateAuthRes(response.data)
             // Store token in the cookie
             document.cookie = `Authorization=${response.data.token}; path=/`
+            localStorage.setItem('role',response.data.role)
             generateToast(toast,'success', 'Successful login')
 
             setTimeout(() => {
