@@ -1,36 +1,30 @@
-import {createContext, FC, ReactNode, useContext, useState} from "react";
+import {createContext, FC, ReactNode, useState} from "react";
+import {AuthContextType, AuthResponse, User} from "../types";
 
-interface User {
-    id: string;
-    firstName: string;
-    lastName:string
-    email: string;
-    password:string
-}
-interface AuthContextType {
-    user: User | null;
-    updateUser: (user: User | null) => void;
-}
 
 //Create context for the global Context
-const AuthContext = createContext<AuthContextType>({
+export const AuthContext = createContext<AuthContextType>({
     user: null,
     updateUser: () => {},
+    AuthRes: null,
+    updateAuthRes: () => {}
 });
 
 export const AuthProvider:FC<{ children: ReactNode }> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
+    const [AuthRes, setAuthRes] = useState<AuthResponse | null>(null)
 
     const updateUser = (newUser: User | null) => {
         setUser(newUser);
     };
+    const updateAuthRes = (response: AuthResponse | null) => {
+        setAuthRes(response)
+    }
 
     return (
-        <AuthContext.Provider value={{ user, updateUser }}>
+        <AuthContext.Provider value={{ user, updateUser, AuthRes,updateAuthRes }}>
             {children}
         </AuthContext.Provider>
     );
 };
 
-// Hook personalizado para usar el contexto de autenticación
-export const useAuth = (): AuthContextType => useContext(AuthContext);

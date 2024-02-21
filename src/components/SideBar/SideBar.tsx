@@ -2,8 +2,8 @@ import {Sidebar} from "primereact/sidebar";
 import {FC} from "react";
 import styles from './SideBar.module.css'
 import {Link} from "react-router-dom";
-import {checkAuthentication} from "../../routes/ProtectedRoute.tsx";
-import {useAuth} from "../../context/AuthProvider.tsx";
+import {checkAuthentication} from "../../utils/authentication.ts";
+import {useLogout} from "../../hooks/useLogout.ts";
 
 
 interface SideBarProps {
@@ -13,10 +13,9 @@ interface SideBarProps {
 
 
 export const SideBar:FC<SideBarProps> = ({showState = false,setShowState}) => {
+    const logout = useLogout()
     // Check if user is Auth
     const isAuthenticated = checkAuthentication();
-    // Brings updateUser for update the global Context
-    const {updateUser} = useAuth()
 
     return(
         <Sidebar visible={showState} onHide={() => setShowState(!showState)} className={styles.sideBar} pt={{
@@ -36,11 +35,7 @@ export const SideBar:FC<SideBarProps> = ({showState = false,setShowState}) => {
                         <Link to={'/'} className={styles.options}>Home</Link>
                         <Link to={'/collections'} className={styles.options}>Collection</Link>
                         <Link to={'/cart'} className={styles.options}>Cart</Link>
-                        <Link to={'/'} className={styles.options} onClick={() => {
-                            //Delete token stored in the cookies
-                            document.cookie = 'Authorization=; expires=Thu,   01 Jan   1970   00:00:00 UTC; path=/;'
-                            updateUser(null)
-                        }}>Logout</Link>
+                        <Link to={'/'} className={styles.options} onClick={logout}>Logout</Link>
                     </>
                 }
 

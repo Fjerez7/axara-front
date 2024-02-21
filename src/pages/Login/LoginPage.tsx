@@ -9,6 +9,7 @@ import {loginUser} from "../../queries/LoginQ.ts"
 import {useRef} from "react";
 import {Toast} from "primereact/toast";
 import {generateToast} from "../../utils/generateToast.ts";
+import {useAuth} from "../../hooks/useAuth.ts";
 
 const LoginPage = () => {
     // hooks of ReactForm library
@@ -23,16 +24,23 @@ const LoginPage = () => {
     // hook to configure routes
     const navigate = useNavigate()
     const toast = useRef<Toast>(null);
+    const {updateAuthRes} = useAuth()
 
     const onSubmit = async (data:any ) => {
         try {
             //Brings data from Query
             const response= await mutation.mutateAsync(data)
+            updateAuthRes(response.data)
             // Store token in the cookie
             document.cookie = `Authorization=${response.data.token}; path=/`
             generateToast(toast,'success', 'Successful login')
+
             setTimeout(() => {
-                navigate("/account")
+                if (response.data.role === "ADMIN"){
+                    navigate('/admin/dashboard')
+                }else{
+                    navigate('/account')
+                }
             },1000)
         }
         catch (error){

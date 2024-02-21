@@ -9,6 +9,7 @@ import AccountPage from "../pages/Account/AccountPage.tsx";
 import AccountDetailsPage from "../pages/AccountDetails/AccountDetailsPage.tsx";
 import AccountChangePasswordPage from "../pages/AccountChangePassword/AccountChangePasswordPage.tsx";
 import {ProtectedRoute} from "./ProtectedRoute.tsx";
+import Dashboard from "../pages/Dashboard/Dashboard.tsx";
 
 // Manage all routes
 export default function Root() {
@@ -35,7 +36,7 @@ export default function Root() {
         },
         {
             path:'/account',
-            element: <ProtectedRoute><AccountPage/></ProtectedRoute>,
+            element: <ProtectedRoute role={'CLIENT'}><AccountPage/></ProtectedRoute>,
         },
         {
             path: '/account/details',
@@ -44,6 +45,10 @@ export default function Root() {
         {
             path: '/account/change-password',
             element: <AccountChangePasswordPage/>
+        },
+        {
+          path: '/admin/dashboard',
+          element: <ProtectedRoute role={'ADMIN'}><Dashboard/></ProtectedRoute>
         },
         {
             path:'*',

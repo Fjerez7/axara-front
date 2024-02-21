@@ -1,18 +1,6 @@
 import axios from "axios";
+import {getCookieValue} from "../utils/authentication.ts";
 
-// Get value Cookie
-export function getCookieValue(cookieName:string) {
-    const name = cookieName + "="
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const cookiesArray = decodedCookie.split(';');
-    for(let i =  0; i < cookiesArray.length; i++) {
-        let cookie = cookiesArray[i].trim();
-        if (cookie.indexOf(name) ===  0) {
-            return cookie.substring(name.length, cookie.length);
-        }
-    }
-    return "";
-}
 
 
 export const fetchUserData = async () => {

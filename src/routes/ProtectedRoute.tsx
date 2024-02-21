@@ -1,21 +1,25 @@
 import {FC} from "react";
-import {getCookieValue} from "../queries/UserQ.ts";
+
 import {Navigate, useLocation} from "react-router-dom";
+import {checkAuthentication} from "../utils/authentication.ts";
+import {useAuth} from "../hooks/useAuth.ts";
 
 interface ProtectedRouteProps {
     children: any
+    role: 'ADMIN' | "CLIENT"
 }
 
-//Check if user is Auth, if there is a token
-export const checkAuthentication = () => {
-    const token = getCookieValue('Authorization');
-    return !!token
-}
 
-export const ProtectedRoute:FC<ProtectedRouteProps> = ({children}) => {
+export const ProtectedRoute:FC<ProtectedRouteProps> = ({children,role}) => {
+    const {AuthRes} = useAuth()
     const isAuthenticated = checkAuthentication()
+
     if(!isAuthenticated){
         return <Navigate to={'/login'} state={{from: useLocation()}} replace/>
     }
-    return children;
+
+    if (AuthRes?.role != role){
+        return <Navigate to={role === 'ADMIN' ? '/admin/dashboard' : '/account'} replace />;
+    }
+    return <>{children}</>;
 }

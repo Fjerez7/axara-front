@@ -1,16 +1,17 @@
 import {Layout} from "../../components/Layout/Layout.tsx";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Divider} from "primereact/divider";
 import styles from './AccountPage.module.css'
 import {fetchUserData} from "../../queries/UserQ.ts";
 import {useQuery} from "@tanstack/react-query";
 import {Button} from "primereact/button";
-import {useAuth} from "../../context/AuthProvider.tsx";
-import {useEffect} from "react";
+import {useEffect} from "react"
+import {useLogout} from "../../hooks/useLogout.ts";
+import {useAuth} from "../../hooks/useAuth.ts";
 
 const AccountPage = () => {
-    const navigate = useNavigate()
     const {updateUser} = useAuth()
+    const logout = useLogout()
 
     // Bring data from method GET in backend
    const {data} = useQuery({
@@ -23,13 +24,6 @@ const AccountPage = () => {
             updateUser(data);
         }
     }, [data, updateUser]);
-
-    //Function for logout
-    const logout = () => {
-       document.cookie = 'Authorization=; expires=Thu,   01 Jan   1970   00:00:00 UTC; path=/;'
-        updateUser(null)
-        navigate('/')
-    }
 
 
     return (
