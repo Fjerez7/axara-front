@@ -1,4 +1,4 @@
-import {Layout} from "../../components/Layout/Layout.tsx";
+import {Layout} from "../../../components/Layout/Layout.tsx";
 import {InputText} from "primereact/inputtext";
 import styles from "./AccountDetailsPage.module.css";
 import {Button} from "primereact/button";

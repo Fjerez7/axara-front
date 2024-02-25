@@ -37,18 +37,22 @@ export const NavBar:FC<NavBarProps> = ({onToggleSideBar}) => {
                             <Link to={'/account'}>
                                 <Button icon='pi pi-user' label={user?.firstName} text className={styles.btn}/>
                             </Link>
+                            <Link to={'/cart'}>
+                                <Button icon='pi pi-shopping-cart' label={'Cart'} text className={styles.btn}/>
+                            </Link>
                         </>
                     ): (
                         <>
                             <Link to={'/login'}>
                                 <Button icon='pi pi-user' label={'Account'} text className={styles.btn}/>
                             </Link>
+                            <Link to={'/cart'}>
+                            <Button icon='pi pi-shopping-cart' label={'Cart'} text className={styles.btn}/>
+                            </Link>
                         </>
                     )
                 }
-                <Link to={'/cart'}>
-                <Button icon='pi pi-shopping-cart' label={'Cart'} text className={styles.btn}/>
-                </Link>
+
             </div>
         </nav>
     )

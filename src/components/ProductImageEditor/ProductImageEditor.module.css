@@ -1,0 +1,14 @@
+.boxImage{
+    width: 400px;
+    height: 250px;
+    border-radius: 15px;
+    background-color: #e5e7eb;
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+.btnChoose{
+    background: transparent;
+    color: #5d4adf;
+    border: none;
+}

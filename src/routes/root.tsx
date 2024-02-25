@@ -6,10 +6,13 @@ import CartPage from "../pages/Cart/CartPage.tsx";
 import LoginPage from "../pages/Login/LoginPage.tsx";
 import SignupPage from "../pages/Signup/SignupPage.tsx";
 import AccountPage from "../pages/Account/AccountPage.tsx";
-import AccountDetailsPage from "../pages/AccountDetails/AccountDetailsPage.tsx";
-import AccountChangePasswordPage from "../pages/AccountChangePassword/AccountChangePasswordPage.tsx";
+import AccountDetailsPage from "../pages/Account/AccountDetails/AccountDetailsPage.tsx";
+import AccountChangePasswordPage from "../pages/Account/AccountChangePassword/AccountChangePasswordPage.tsx";
 import {ProtectedRoute} from "./ProtectedRoute.tsx";
 import Dashboard from "../pages/Dashboard/Dashboard.tsx";
+import DashboardProducts from "../pages/Dashboard/DashboardProducts/DashboardProducts.tsx";
+import DashboardSettings from "../pages/Dashboard/DashboardSettings/DashboardSettings.tsx";
+import DashboardProductEditor from "../pages/Dashboard/DashboardProductEditor/DashboardProductEditor.tsx";
 
 // Manage all routes
 export default function Root() {
@@ -24,7 +27,7 @@ export default function Root() {
         },
         {
             path: '/cart',
-            element: <CartPage/>
+            element:<ProtectedRoute role={'CLIENT'}><CartPage/></ProtectedRoute>
         },
         {
             path: '/login',
@@ -44,11 +47,23 @@ export default function Root() {
         },
         {
             path: '/account/details',
-            element: <AccountDetailsPage/>
+            element:<ProtectedRoute role={'CLIENT'}><AccountDetailsPage/></ProtectedRoute>
         },
         {
             path: '/account/change-password',
-            element: <AccountChangePasswordPage/>
+            element: <ProtectedRoute role={'CLIENT'}><AccountChangePasswordPage/></ProtectedRoute>
+        },
+        {
+            path: '/admin/dashboard/products-management',
+            element: <ProtectedRoute role={'ADMIN'}><DashboardProducts/></ProtectedRoute>
+        },
+        {
+            path: '/admin/dashboard/products-management/product-editor',
+            element: <ProtectedRoute role={'ADMIN'}><DashboardProductEditor/></ProtectedRoute>
+        },
+        {
+            path: '/admin/dashboard/settings',
+            element: <ProtectedRoute role={'ADMIN'}><DashboardSettings/></ProtectedRoute>
         },
         {
             path:'*',

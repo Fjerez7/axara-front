@@ -4,6 +4,7 @@ import styles from './SideBar.module.css'
 import {Link} from "react-router-dom";
 import {checkAuthentication} from "../../utils/authentication.ts";
 import {useLogout} from "../../hooks/useLogout.ts";
+import {useAuth} from "../../hooks/useAuth.ts";
 
 
 interface SideBarProps {
@@ -16,6 +17,7 @@ export const SideBar:FC<SideBarProps> = ({showState = false,setShowState}) => {
     const logout = useLogout()
     // Check if user is Auth
     const isAuthenticated = checkAuthentication();
+    const {AuthRes} = useAuth()
 
     return(
         <Sidebar visible={showState} onHide={() => setShowState(!showState)} className={styles.sideBar} pt={{
@@ -30,6 +32,13 @@ export const SideBar:FC<SideBarProps> = ({showState = false,setShowState}) => {
                         <Link to={'/login'} className={styles.options}>Login</Link>
                         <Link to={'/signup'} className={styles.options}>Register</Link>
                     </>
+                ) : AuthRes?.role === 'ADMIN' ? (
+                        <>
+                            <Link to={'/'} className={styles.options}>Home</Link>
+                            <Link to={'/collections'} className={styles.options}>Collection</Link>
+                            <Link to={'/'} className={styles.options} onClick={logout}>Logout</Link>
+                        </>
+
                 ):
                     <>
                         <Link to={'/'} className={styles.options}>Home</Link>
