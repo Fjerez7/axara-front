@@ -1,0 +1,12 @@
+.inpBox{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+.inpLabel{
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.divBox{
+    width: 500px;
+}

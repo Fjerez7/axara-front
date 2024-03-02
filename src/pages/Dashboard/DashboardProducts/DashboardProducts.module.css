@@ -4,3 +4,17 @@
 .cardTitle{
     width: 100%;
 }
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+.headerTitle{
+    font-weight: bold;
+    font-size: 20px;
+}
+.boxImage{
+    width:60px;
+    border-radius: 8px;
+}
