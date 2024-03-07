@@ -33,7 +33,7 @@ const AccountPage = () => {
                 <div className={styles.sectionOpt}>
                 <Link to={'details'}>
                     <h2>Personal Details</h2>
-                    <p>Edit your personal details such as email address, here</p>
+                    <p>Edit your personal details such as Full name, here</p>
                 </Link>
                 <Divider className={styles.divider}/>
                 <Link to={'change-password'}>

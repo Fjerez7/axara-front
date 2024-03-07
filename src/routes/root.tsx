@@ -13,6 +13,7 @@ import Dashboard from "../pages/Dashboard/Dashboard.tsx";
 import DashboardProducts from "../pages/Dashboard/DashboardProducts/DashboardProducts.tsx";
 import DashboardSettings from "../pages/Dashboard/DashboardSettings/DashboardSettings.tsx";
 import DashboardProductEditor from "../pages/Dashboard/DashboardProductEditor/DashboardProductEditor.tsx";
+import DashboardProductUpdate from "../pages/Dashboard/DashboardProductUpdate/DashboardProductUpdate.tsx";
 
 // Manage all routes
 export default function Root() {
@@ -58,8 +59,12 @@ export default function Root() {
             element: <ProtectedRoute role={'ADMIN'}><DashboardProducts/></ProtectedRoute>
         },
         {
-            path: '/admin/dashboard/products-management/product-editor',
+            path: '/admin/dashboard/products-management/product-editor-create',
             element: <ProtectedRoute role={'ADMIN'}><DashboardProductEditor/></ProtectedRoute>
+        },
+        {
+            path: '/admin/dashboard/products-management/product-editor-update',
+            element: <ProtectedRoute role={'ADMIN'}><DashboardProductUpdate/></ProtectedRoute>
         },
         {
             path: '/admin/dashboard/settings',

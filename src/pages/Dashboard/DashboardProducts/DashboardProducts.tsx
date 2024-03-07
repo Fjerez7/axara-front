@@ -22,7 +22,9 @@ const DashboardProducts = () => {
         queryFn: getAllProducts
     })
     const [visible,setVisible] = useState(false)
+    const [productId, setProductId] = useState(0)
     const deleteMutation = deleteProduct();
+
     const header = (
         <div className={styles.header}>
             <span className={styles.headerTitle}>Products</span>
@@ -45,18 +47,19 @@ const DashboardProducts = () => {
         return formatCurrency(product.price);
     };
     const buttonsBodyTemplate = (product:Product) => {
-
         return(
             <>
                 <Button rounded outlined icon={'pi pi-pencil'} style={{marginRight: '10px'}}
-                        onClick={() => {console.log(product.id)}} />
+                        onClick={() => {navigate('product-editor-update',{state: {product}})}} />
                 <ConfirmDialog visible={visible} onHide={() => setVisible(false)} icon={'pi pi-info-circle'}
                 acceptClassName={'p-button-danger'} message={'Do you want to delete this Product?'}
-                               accept={() => {
-                    deleteMutation.mutate(product.id,{onSuccess: () => refetch()})
-                }} reject={() => setVisible(false)} header={'Delete confirmation'}
+                               accept={() => {deleteMutation.mutate(productId,{onSuccess: () => refetch()})}}
+                               reject={() => setVisible(false)} header={'Delete confirmation'}
                 />
-                <Button rounded  outlined icon={'pi pi-trash'}  severity={'danger'} onClick={() => setVisible(true)}/>
+                <Button rounded  outlined icon={'pi pi-trash'}  severity={'danger'} onClick={() => {
+                    setProductId(product.id)
+                    setVisible(true)
+                }}/>
             </>
         )
     }
@@ -68,7 +71,7 @@ const DashboardProducts = () => {
                 <Divider/>
                 <div>
                     <Button label={"Add new product"} icon={'pi pi-plus-circle'} rounded iconPos={'right'}
-                            onClick={() => navigate('product-editor')}/>
+                            onClick={() => navigate('product-editor-create')}/>
                 </div>
                 <Divider/>
                 <DataTable value={data} header={header} footer={footer} tableStyle={{minWidth:'60rem'}}>

@@ -1,8 +1,14 @@
 export interface User {
-    id: string;
+    id: number;
     firstName: string;
     lastName:string
     email: string;
     password:string;
     role: string
+}
+
+export interface UserUpdate {
+    firstName?: string;
+    lastName?:string
+    password?:string;
 }

@@ -49,9 +49,9 @@ const DashboardProductEditor = () => {
                 <Card style={{padding: '20px'}}>
                     <form onSubmit={handleSubmit(onSubmit)} encType={'multipart/form-data'}>
                         <section className={styles.sectionEditor}>
-                            <ProductForm form={control} fnUploadImages={setSelectedFiles}/>
+                            <ProductForm form={[control]} fnUploadImages={setSelectedFiles}/>
                         </section>
-                        <Button type={'submit'} label={'Publish product'}/>
+                        <Button type={'submit'} label={'Publish product'} className={styles.btnCreate}/>
                     </form>
                 </Card>
             </div>

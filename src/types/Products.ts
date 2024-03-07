@@ -12,3 +12,8 @@ export interface ImageProduct {
     uid: string;
     path: string
 }
+
+export interface DeleteImageReq{
+    productId: number;
+    imageUid: string;
+}

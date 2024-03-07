@@ -1,0 +1,40 @@
+.sectionUpdate{
+    width: 1500px;
+}
+.sectionForm{
+    display: flex;
+    justify-content: space-between;
+}
+.btnUpdate{
+    margin-top: 20px;
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+.sectionImages{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 50px;
+}
+.btnImageEdit{
+    display: flex;
+    justify-content: end;
+    margin-bottom: 20px;
+}
+/*.sectionEditImg {*/
+/*    width: 300px;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: space-between;*/
+/*    margin: 10px;*/
+/*}*/
+/*.btnDeleteImg{*/
+/*    width: 100%;*/
+/*    height: 50px;*/
+/*    border-radius: 5px;*/
+/*}*/
+.containerEditImg{
+    display: flex;
+    justify-content: space-between;
+}

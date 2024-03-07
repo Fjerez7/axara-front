@@ -6,11 +6,13 @@ import {InputText} from "primereact/inputtext";
 import {InputNumber} from "primereact/inputnumber";
 import {SelectButton} from "primereact/selectbutton";
 import {Slider} from "primereact/slider";
-import { FC} from "react";
+import {FC, useEffect} from "react";
+import {Product} from "../../types/Products.ts";
 
 interface ProductFormProps {
-    form: any,
-    fnUploadImages: (files:any) => void
+    form: any[],
+    fnUploadImages?: (files:any) => void
+    product?: Product;
 }
 
 const sizes = [
@@ -19,14 +21,22 @@ const sizes = [
     { value: 'L'},
     { value: 'XL'},
 ];
-export const ProductForm: FC<ProductFormProps> = ({form, fnUploadImages}) => {
+export const ProductForm: FC<ProductFormProps> = ({form, fnUploadImages,product}) => {
+    const [control, setValue] = form
+    useEffect(() => {
+        if (product) {
+            Object.keys(product).forEach(key => {
+                setValue(key, product[key]);
+            });
+        }
+    }, [form, product]);
 
     return(
         <>
             <div className={styles.divBox}>
                 <Controller
                     name="description"
-                    control={form}
+                    control={control}
                     rules={{ required: 'Field required' }}
                     render={({ field, fieldState }) => (
                         <div className={styles.inpBox}>
@@ -41,14 +51,14 @@ export const ProductForm: FC<ProductFormProps> = ({form, fnUploadImages}) => {
                     <label  className={styles.inpLabel}>Upload Images:</label>
                     <input type={'file'} id={'img-inp'} name={'files'} multiple
                            onChange={(e) => {
-                               fnUploadImages([...e.target.files])
+                               fnUploadImages!([...e.target.files])
                            }}/>
                 </div>
             </div>
             <div className={styles.divBox}>
                 <Controller
                     name="name"
-                    control={form}
+                    control={control}
                     rules={{ required: 'Field required' }}
                     render={({ field, fieldState }) => (
                         <div className={styles.inpBox}>
@@ -61,7 +71,7 @@ export const ProductForm: FC<ProductFormProps> = ({form, fnUploadImages}) => {
                 />
                 <Controller
                     name="price"
-                    control={form}
+                    control={control}
                     rules={{ required: 'Field required' }}
                     render={({ field, fieldState }) => (
                         <div className={styles.inpBox}>
@@ -75,7 +85,7 @@ export const ProductForm: FC<ProductFormProps> = ({form, fnUploadImages}) => {
                 />
                 <Controller
                     name="size"
-                    control={form}
+                    control={control}
                     rules={{ required: 'Field required.' }}
                     render={({ field }) => (
                         <div className={styles.inpBox}>
@@ -88,7 +98,7 @@ export const ProductForm: FC<ProductFormProps> = ({form, fnUploadImages}) => {
                 />
                 <Controller
                     name="stock"
-                    control={form}
+                    control={control}
                     rules={{ required: 'Field required.' }}
                     render={({ field }) => (
                         <div className={styles.inpBox}>
