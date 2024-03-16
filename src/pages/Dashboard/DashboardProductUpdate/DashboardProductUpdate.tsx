@@ -33,15 +33,20 @@ const DashboardProductUpdate = () => {
     const uploadImages = updateImages()
     const updProduct = updateProduct()
     const onSubmit = async (data:any) => {
-        console.log('data', data)
         const formData = new FormData()
         formData.append('id', data.id)
-        selectedNewFiles.forEach((file:any) => {
+        selectedNewFiles.forEach((file: any) => {
             formData.append('files', file)
         });
         try {
-            await uploadImages.mutateAsync(formData);
-            await updProduct.mutateAsync(data);
+            // Hay imagenes nuevas
+            if (selectedNewFiles.length > 0) {
+                await uploadImages.mutateAsync(formData);
+                await updProduct.mutateAsync(data);
+            }else {
+                // No hay imagenes nuevas
+                await updProduct.mutateAsync(data);
+            }
             navigate('/admin/dashboard/products-management')
         }catch (e) {
             console.error(e)

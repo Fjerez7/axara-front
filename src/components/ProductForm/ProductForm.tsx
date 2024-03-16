@@ -29,7 +29,8 @@ export const ProductForm: FC<ProductFormProps> = ({form, fnUploadImages,product}
                 setValue(key, product[key]);
             });
         }
-    }, [form, product]);
+    }, [product]);
+
 
     return(
         <>

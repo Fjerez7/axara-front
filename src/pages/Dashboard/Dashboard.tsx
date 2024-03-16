@@ -19,11 +19,6 @@ const Dashboard = () => {
                             <p>View, Add, update and delete products, here</p>
                         </Link>
                         <Divider className={styles.divider}/>
-                        <Link to={'settings'}>
-                            <h2>Settings</h2>
-                            <p>View, update and review your profile information, here</p>
-                        </Link>
-                        <Divider className={styles.divider}/>
                     </div>
                     <Button type={'button'} label={'Logout'} className={styles.btn} onClick={logout}/>
                 </div>

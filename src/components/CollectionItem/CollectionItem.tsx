@@ -5,16 +5,15 @@ import styles from './CollectionItem.module.css'
 interface CollectionItemProps {
     image: string;
     name: string;
-    price: string
+    price: number
 }
 
 export const CollectionItem:FC<CollectionItemProps> = ({image,name,price}) => {
     const img = (
-        <img alt="img of item" src={image} />
+        <img alt="img of item" src={`http://localhost:8080/api/v1/products/images/${image}`} className={styles.imgCard} />
     );
     return (
         <Card className={styles.card} title={name} subTitle={`$${price}`} header={img} pt={{
-            body: {className: styles.bodyCard},
             title: {className: styles.titleCard},
             subTitle: {className: styles.subtitleCard}
         }}/>

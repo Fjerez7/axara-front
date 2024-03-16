@@ -11,7 +11,6 @@ import AccountChangePasswordPage from "../pages/Account/AccountChangePassword/Ac
 import {ProtectedRoute} from "./ProtectedRoute.tsx";
 import Dashboard from "../pages/Dashboard/Dashboard.tsx";
 import DashboardProducts from "../pages/Dashboard/DashboardProducts/DashboardProducts.tsx";
-import DashboardSettings from "../pages/Dashboard/DashboardSettings/DashboardSettings.tsx";
 import DashboardProductEditor from "../pages/Dashboard/DashboardProductEditor/DashboardProductEditor.tsx";
 import DashboardProductUpdate from "../pages/Dashboard/DashboardProductUpdate/DashboardProductUpdate.tsx";
 
@@ -65,10 +64,6 @@ export default function Root() {
         {
             path: '/admin/dashboard/products-management/product-editor-update',
             element: <ProtectedRoute role={'ADMIN'}><DashboardProductUpdate/></ProtectedRoute>
-        },
-        {
-            path: '/admin/dashboard/settings',
-            element: <ProtectedRoute role={'ADMIN'}><DashboardSettings/></ProtectedRoute>
         },
         {
             path:'*',

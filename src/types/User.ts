@@ -10,5 +10,10 @@ export interface User {
 export interface UserUpdate {
     firstName?: string;
     lastName?:string
-    password?:string;
+}
+
+export interface UpdatePassword {
+    currentPassword: string;
+    newPassword: string;
+    confirmPassword: string;
 }

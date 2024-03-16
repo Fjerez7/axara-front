@@ -10,6 +10,7 @@ import {useRef} from "react";
 import {Toast} from "primereact/toast";
 import {generateToast} from "../../utils/generateToast.ts";
 import {useAuth} from "../../hooks/useAuth.ts";
+import {Password} from "primereact/password";
 
 const LoginPage = () => {
     // hooks of ReactForm library
@@ -84,7 +85,8 @@ const LoginPage = () => {
                         render={({ field, fieldState }) => (
                             <>
                                     <span className="p-float-label">
-                                    <InputText id={field.name} type={'password'} value={field.value}
+                                    <Password id={field.name} value={field.value} width={500} inputStyle={{width: '100%'}}
+                                              pt={{panel: {hidden: true}}} toggleMask
                                                className={classNames({ 'p-invalid': fieldState.error },styles.inp)}
                                                onChange={(e) => field.onChange(e.target.value)} />
                                     <label htmlFor={field.name}>Password</label>

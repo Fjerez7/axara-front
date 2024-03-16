@@ -9,6 +9,7 @@ import {classNames} from "primereact/utils";
 import {generateToast} from "../../utils/generateToast.ts";
 import {useRef} from "react";
 import {Toast} from "primereact/toast";
+import {Password} from "primereact/password";
 
 
 const SignupPage  = () => {
@@ -104,7 +105,8 @@ const SignupPage  = () => {
                             render={({ field, fieldState }) => (
                                 <>
                                     <span className="p-float-label">
-                                    <InputText id={field.name} type={'password'} value={field.value}
+                                    <Password id={field.name} value={field.value} width={500} inputStyle={{width: '100%'}}
+                                              pt={{panel: {hidden: true}}} toggleMask
                                                className={classNames({ 'p-invalid': fieldState.error },styles.inp)}
                                                onChange={(e) => field.onChange(e.target.value)} />
                                     <label htmlFor={field.name}>Password</label>
