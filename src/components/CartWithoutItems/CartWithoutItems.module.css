@@ -1,0 +1,19 @@
+.cart{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 350px
+}
+.icon{
+    width: 200px;
+    height: 200px;
+}
+.title{
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 0;
+}
+.btn{
+    width:350px;
+}

@@ -52,7 +52,6 @@ export const NavBar:FC<NavBarProps> = ({onToggleSideBar}) => {
                         </>
                     )
                 }
-
             </div>
         </nav>
     )

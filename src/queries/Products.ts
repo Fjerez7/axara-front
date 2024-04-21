@@ -14,6 +14,11 @@ export const uploadProduct = () => {
     })
 }
 
+export const getProduct = async (id:number) => {
+    const {data} = await axios.get(`http://localhost:8080/api/v1/products/${id}`)
+    return data
+}
+
 export const getAllProducts = async () => {
     const {data} = await axios.get('http://localhost:8080/api/v1/products')
     return data

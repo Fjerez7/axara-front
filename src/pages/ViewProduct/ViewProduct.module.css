@@ -1,0 +1,20 @@
+.boxMain {
+   padding-top: 200px;
+    height: 100vh;
+}
+.divContainer{
+    display: flex;
+    justify-content: space-evenly;
+}
+.divInfoProduct{
+    width: 400px;
+}
+.imgItem{
+    width: 1000px;
+    display: block;
+    padding: 50px;
+}
+.btnAddCart{
+    width: 100%;
+    height: 50px;
+}
