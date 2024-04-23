@@ -1,0 +1,15 @@
+.formAddress{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.inp{
+    width:470px;
+}
+.btnAddress{
+    width: 100%;
+    margin-top: 50px;
+}

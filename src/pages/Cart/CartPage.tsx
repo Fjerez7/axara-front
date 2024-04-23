@@ -5,19 +5,39 @@ import {OrderItem} from "../../components/OrderItem/OrderItem.tsx";
 import {Button} from "primereact/button";
 import {useCartContext} from "../../hooks/useCartContext.ts";
 import {useQuery} from "@tanstack/react-query";
-import {getCart} from "../../queries/CartQ.ts";
-import {OrderItem as OrderItemType} from "../../types/Cart.ts";
+import {getCart, removeOrderItem} from "../../queries/CartQ.ts";
+import { OrderItem as OrderItemType} from "../../types/Cart.ts";
 import {formatCurrency} from "../../utils/formatCurrency.ts";
+import {useNavigate} from "react-router-dom";
+import {useEffect} from "react";
 
 
 const CartPage = () => {
-    const {cartData} = useCartContext()
+    const {cartData,updateCart} = useCartContext()
+    const navigate = useNavigate()
+    const deleteOrderItem = removeOrderItem()
 
-    const {data} = useQuery({
+    const {data,refetch,isLoading,error} = useQuery({
         queryKey: ['cart', cartData?.id],
         queryFn: () => getCart(cartData?.id!),
         enabled: cartData?.id !== undefined
     })
+    useEffect(() => {
+        if(!isLoading && !error && data){
+            updateCart(data)
+        }
+    }, [isLoading,error,data]);
+
+
+    const handleRemoveItem = (item: OrderItemType) => {
+        try {
+            deleteOrderItem.mutate(item.id,{onSuccess: () => {
+                refetch()
+            }})
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     return(
         <Layout>
@@ -26,7 +46,7 @@ const CartPage = () => {
                     <div className={styles.orderItemsBox}>
                         <h2 className={styles.titleCart}>Your Cart</h2>
                         {data?.orderItems.map((item:OrderItemType, index:number) => (
-                            <OrderItem item={item} key={index} />
+                            <OrderItem item={item} key={index} onDelete={() => handleRemoveItem(item)} />
                         ))}
                     </div>
                     <div className={styles.checkoutBox}>
@@ -34,7 +54,7 @@ const CartPage = () => {
                             <h3>Total:</h3>
                             <h3>{formatCurrency(data.totalAmount)}</h3>
                         </div>
-                        <Button label={'Checkout'} className={styles.checkoutBtn}/>
+                        <Button label={'Checkout'} className={styles.checkoutBtn} onClick={() => navigate('/checkout')}/>
                     </div>
                 </div>
             ): (

@@ -14,6 +14,7 @@ import DashboardProducts from "../pages/Dashboard/DashboardProducts/DashboardPro
 import DashboardProductEditor from "../pages/Dashboard/DashboardProductEditor/DashboardProductEditor.tsx";
 import DashboardProductUpdate from "../pages/Dashboard/DashboardProductUpdate/DashboardProductUpdate.tsx";
 import {ViewProduct} from "../pages/ViewProduct/ViewProduct.tsx";
+import {CheckoutPage} from "../pages/Checkout/CheckoutPage.tsx";
 
 // Manage all routes
 export default function Root() {
@@ -29,6 +30,10 @@ export default function Root() {
         {
             path: '/cart',
             element:<ProtectedRoute role={'CLIENT'}><CartPage/></ProtectedRoute>
+        },
+        {
+            path: '/checkout',
+            element:<ProtectedRoute role={'CLIENT'}><CheckoutPage/></ProtectedRoute>
         },
         {
             path: '/login',

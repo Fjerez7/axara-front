@@ -14,6 +14,7 @@ export interface Cart{
     id: number;
     userId: number;
     orderItems: OrderItem[];
+    totalAmount: number;
 }
 export interface CartContextType{
     cartData: Cart | null;

@@ -1,0 +1,36 @@
+.checkoutDetails{
+    margin-top: 80px;
+    display: flex;
+    justify-content: space-between;
+    gap: 120px;
+}
+.checkoutForm{
+    width: 1000px;
+}
+.checkoutTitle{
+    font-size: 40px;
+    font-weight: 900;
+    margin: 0 0 60px 0;
+}
+.AddressTitle{
+   padding-bottom: 30px;
+}
+.paymentBox{
+    width: 500px;
+    margin-top: 90px;
+}
+.totalPrice{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.paymentBtn{
+    width: 100%;
+    height: 50px;
+}
+.pdfEditor{
+    width: 1000px;
+    height: 1200px;
+    text-align: center;
+    padding: 0;
+}

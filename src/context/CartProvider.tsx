@@ -9,7 +9,7 @@ export const CartContext = createContext<CartContextType>({
 
 export const CartProvider:FC<{children:ReactNode}> = ({children}) => {
     const [cartData, setCartData] = useState<Cart | null>(null)
-    const updateCart = (newCart:Cart) => {
+    const updateCart = (newCart:Cart | null) => {
         setCartData(newCart)
     }
     return (
