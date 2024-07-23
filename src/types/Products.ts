@@ -8,6 +8,7 @@ export interface Product {
     category: string;
     images: ImageProduct[]
 }
+export type ProductKeys = keyof Product;
 export interface ImageProduct {
     uid: string;
     path: string

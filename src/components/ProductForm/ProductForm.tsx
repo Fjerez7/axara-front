@@ -7,7 +7,7 @@ import {InputNumber} from "primereact/inputnumber";
 import {SelectButton} from "primereact/selectbutton";
 import {Slider} from "primereact/slider";
 import {FC, useEffect} from "react";
-import {Product} from "../../types/Products.ts";
+import {Product, ProductKeys} from "../../types/Products.ts";
 
 interface ProductFormProps {
     form: any[],
@@ -25,8 +25,9 @@ export const ProductForm: FC<ProductFormProps> = ({form, fnUploadImages,product}
     const [control, setValue] = form
     useEffect(() => {
         if (product) {
-            Object.keys(product).forEach(key => {
-                setValue(key, product[key]);
+            Object.keys(product).forEach((key) => {
+                console.log(key,'key')
+                setValue(key, product[key as ProductKeys]);
             });
         }
     }, [product]);
@@ -52,7 +53,7 @@ export const ProductForm: FC<ProductFormProps> = ({form, fnUploadImages,product}
                     <label  className={styles.inpLabel}>Upload Images:</label>
                     <input type={'file'} id={'img-inp'} name={'files'} multiple
                            onChange={(e) => {
-                               fnUploadImages!([...e.target.files])
+                               fnUploadImages!([...e.target.files!])
                            }}/>
                 </div>
             </div>
